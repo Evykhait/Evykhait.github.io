@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kompetenzen Skilltree</title>
+    <style>
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #6c8baf;
+            --background-color: #f5f7fa;
+            --hover-color: #3a5a8f;
+            --disabled-color: #a0a0a0;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--background-color);
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+        }
+        
+        /* Baumstruktur - Hauptcontainer */
+        .skilltree {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+        
+        /* Wurzelknoten */
+        .root-node {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 25px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            margin: 0 auto 20px;
+            max-width: 300px;
+        }
+        
+        /* Container für die Cluster */
+        .clusters-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        /* Cluster-Box */
+        .cluster {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            width: calc(25% - 20px);
+            min-width: 250px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Cluster-Header */
+        .cluster-header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        /* Kompetenzen-Container */
+        .kompetenzen-list {
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        /* Kompetenz-Item */
+        .kompetenz-item {
+            padding: 10px;
+            background-color: #f9fafb;
+            border-radius: 4px;
+            position: relative;
+            transition: background-color 0.2s;
+        }
+        
+        .kompetenz-item:hover {
+            background-color: #f3f4f6;
+        }
+        
+        /* Deaktivierte Kompetenz */
+        .kompetenz-item.disabled {
+            color: var(--disabled-color);
+            background-color: #f1f1f1;
+        }
+        
+        /* Beschreibungstext Container */
+        .description-box {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            background-color: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            width: 250px;
+            max-width: 300px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            pointer-events: none;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .clusters-row {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cluster {
+                width: 100%;
+                max-width: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Kompetenzen Skilltree</h1>
+        
+        <div class="skilltree">
+            <div class="root-node">Kompetenzen</div>
+            
+            <div class="clusters-row">
+                <!-- Cluster 1: Fachkompetenz -->
+                <div class="cluster">
+                    <div class="cluster-header">Fachkompetenz</div>
+                    <div class="kompetenzen-list">
+                        <div class="kompetenz-item disabled" data-description="Kenntnisse und Fähigkeiten im Umgang mit gängiger Anwendersoftware wie Office-Programmen.">
+                            Anwendersoftware
+                        </div>
+                        <div class="kompetenz-item" data-description="Kenntnisse über den sicheren Umgang mit Daten und Informationen.">
+                            Datensicherheit
+                        </div>
+                        <div class="kompetenz-item disabled" data-description="Fähigkeit, digitale Medien zu verstehen, zu analysieren und zu nutzen.">
+                            Digitale Medienkompetenz
+                        </div>
+                        <div class="kompetenz-item disabled" data-description="Kenntnisse über spezielle Software und Tools im jeweiligen Fachbereich.">
+                            Fachspezifische Anwendungen
+                        </div>
+                        <div class="kompetenz-item disabled" data-description="Kenntnisse über KI-basierte Tools und deren Einsatzmöglichkeiten.">
+                            KI-Anwendungen
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cluster 2: Methodenkompetenz -->
+                <div class="cluster">
+                    <div class="cluster-header">Methodenkompetenz</div>
+                    <div class="kompetenzen-list">
+                        <div class="kompetenz-item" data-description="Fähigkeit, flexibel auf Veränderungen zu reagieren und agile Arbeitsweisen anzuwenden.">
+                            Agilität
+                        </div>
+                        <div class="kompetenz-item" data-description="Fähigkeit, Veränderungsprozesse zu planen, zu begleiten und erfolgreich umzusetzen.">
+                            Change Management
+                        </div>
+                        <div class="kompetenz-item disabled" data-description="Kenntnisse über digitale Lernformate und -methoden.">
+                            Digitale Lernmethoden
+                        </div>
+                        <div class="kompetenz-item" data-description="Fähigkeit, Arbeitsprozesse effizient zu organisieren und zu strukturieren.">
+                            Effektive Arbeitsorganisation
+                        </div>
+                        <div class="kompetenz-item" data-description="Kenntnisse über digitale Zusammenarbeit und kollaborative Tools.">
+                            Kollaborative Arbeitsmethoden
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cluster 3: Sozialkompetenz -->
+                <div class="cluster">
+                    <div class="cluster-header">Sozialkompetenz</div>
+                    <div class="kompetenzen-list">
+                        <div class="kompetenz-item" data-description="Fähigkeit zur effektiven Kommunikation über digitale Kanäle und Medien.">
+                            Digitale Kommunikation
+                        </div>
+                        <div class="kompetenz-item" data-description="Fähigkeit, sich in andere hineinzuversetzen und deren Perspektiven zu verstehen.">
+                            Empathie
+                        </div>
+                        <div class="kompetenz-item" data-description="Fähigkeit zum respektvollen Umgang mit Menschen verschiedener kultureller Hintergründe.">
+                            Interkulturelle Kompetenz
+                        </div>
+                        <div class="kompetenz-item disabled" data-description="Fähigkeit, berufliche Netzwerke aufzubauen und zu pflegen.">
+                            Netzwerken
+                        </div>
+                        <div class="kompetenz-item" data-description="Fähigkeit zur konstruktiven Zusammenarbeit in Teams.">
+                            Teamfähigkeit
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cluster 4: Selbstkompetenz -->
+                <div class="cluster">
+                    <div class="cluster-header">Selbstkompetenz</div>
+                    <div class="kompetenzen-list">
+                        <div class="kompetenz-item" data-description="Fähigkeit, selbstständig Entscheidungen zu treffen und Verantwortung zu übernehmen.">
+                            Eigenverantwortung
+                        </div>
+                        <div class="kompetenz-item" data-description="Fähigkeit, Informationen kritisch zu hinterfragen und zu bewerten.">
+                            Kritisches Denken
+                        </div>
+                        <div class="kompetenz-item disabled" data-description="Offenheit und Motivation für kontinuierliches Lernen und persönliche Weiterentwicklung.">
+                            Lernbereitschaft
+                        </div>
+                        <div class="kompetenz-item" data-description="Fähigkeit zur Selbstreflexion und kritischen Auseinandersetzung mit dem eigenen Handeln.">
+                            Reflexionsfähigkeit
+                        </div>
+                        <div class="kompetenz-item" data-description="Psychische Widerstandsfähigkeit gegenüber Belastungen und Stress.">
+                            Resilienz
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Beschreibungs-Box (wird dynamisch positioniert) -->
+    <div id="description-box" class="description-box"></div>
+    
+    <!-- Info-Leiste -->
+    <div style="position: fixed; bottom: 10px; left: 10px; background-color: rgba(0,0,0,0.7); color: white; padding: 5px 10px; border-radius: 5px; font-size: 12px; z-index: 999;">
+        Hover über eine Kompetenz zeigt deren Beschreibung
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Beschreibungs-Box-Element
+            const descriptionBox = document.getElementById('description-box');
+            
+            // Event-Listener für alle Kompetenz-Items
+            const kompetenzItems = document.querySelectorAll('.kompetenz-item:not(.disabled)');
+            
+            kompetenzItems.forEach(item => {
+                // Maus-Enter-Event (Beschreibung anzeigen)
+                item.addEventListener('mouseenter', function(e) {
+                    const description = this.getAttribute('data-description');
+                    if (description) {
+                        // Beschreibungstext setzen
+                        descriptionBox.textContent = description;
+                        
+                        // Element-Position und Größe ermitteln
+                        const rect = this.getBoundingClientRect();
+                        
+                        // Viewport-Abmessungen
+                        const viewportWidth = window.innerWidth;
+                        const viewportHeight = window.innerHeight;
+                        
+                        // Beschreibungsbox anzeigen (für Größenberechnung)
+                        descriptionBox.style.display = 'block';
+                        
+                        // Größe der Beschreibungsbox ermitteln
+                        const boxWidth = descriptionBox.offsetWidth;
+                        const boxHeight = descriptionBox.offsetHeight;
+                        
+                        // Verfügbaren Platz in allen Richtungen berechnen
+                        const spaceRight = viewportWidth - rect.right - 15;
+                        const spaceLeft = rect.left - 15;
+                        const spaceBelow = viewportHeight - rect.bottom - 15;
+                        const spaceAbove = rect.top - 15;
+                        
+                        // Positionierung basierend auf verfügbarem Platz
+                        // Standardmäßig: Beschreibung rechts vom Element
+                        descriptionBox.style.left = 'auto';
+                        descriptionBox.style.right = 'auto';
+                        descriptionBox.style.top = 'auto';
+                        descriptionBox.style.bottom = 'auto';
+                        
+                        // Horizontale Positionierung - auf der Seite mit mehr Platz
+                        if (spaceRight >= boxWidth || spaceRight > spaceLeft) {
+                            // Rechts vom Element
+                            descriptionBox.style.left = rect.right + 15 + 'px';
+                            
+                            // Anpassung wenn nötig
+                            if (rect.right + 15 + boxWidth > viewportWidth) {
+                                descriptionBox.style.left = viewportWidth - boxWidth - 5 + 'px';
+                            }
+                        } else {
+                            // Links vom Element
+                            descriptionBox.style.left = 'auto';
+                            descriptionBox.style.right = viewportWidth - rect.left + 15 + 'px';
+                            
+                            // Anpassung wenn nötig
+                            if (rect.left - 15 - boxWidth < 0) {
+                                descriptionBox.style.right = 'auto';
+                                descriptionBox.style.left = 5 + 'px';
+                            }
+                        }
+                        
+                        // Vertikale Positionierung
+                        if (rect.top + boxHeight > viewportHeight) {
+                            // Wenn die Box unten rausragt, oben ausrichten
+                            descriptionBox.style.top = Math.max(5, viewportHeight - boxHeight - 5) + 'px';
+                        } else {
+                            // Normalerweise auf gleicher Höhe wie Element
+                            descriptionBox.style.top = rect.top + 'px';
+                        }
+                    }
+                });
+                
+                // Maus-Leave-Event (Beschreibung verstecken)
+                item.addEventListener('mouseleave', function() {
+                    descriptionBox.style.display = 'none';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
