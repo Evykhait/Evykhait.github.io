@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kompetenzen Skilltree</title>
+    <style>
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #6c8baf;
+            --background-color: #f5f7fa;
+            --hover-color: #3a5a8f;
+            --disabled-color: #a0a0a0;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--background-color);
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+        }
+        
+        /* Baumstruktur - Hauptcontainer */
+        .skilltree {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+        
+        /* Wurzelknoten */
+        .root-node {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 25px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            margin: 0 auto 20px;
+            max-width: 300px;
+        }
+        
+        /* Container für die Cluster */
+        .clusters-row {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+            width: 100%;
+        }
+        
+        /* Cluster-Box */
+        .cluster {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            width: calc(25% - 20px);
+            min-width: 250px;
+            max-width: 275px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            flex: 1 0 auto;
+            margin-bottom: 20px;
+        }
+        
+        /* Cluster-Header */
+        .cluster-header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        /* Kompetenzen-Container */
+        .kompetenzen-list {
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        /* Kompetenz-Item */
+        .kompetenz-item {
+            padding: 10px;
+            background-color: #f9fafb;
+            border-radius: 4px;
+            position: relative;
+            transition: background-color 0.2s;
+        }
+        
+        .kompetenz-item:hover {
+            background-color: #f3f4f6;
+        }
+        
+        /* Deaktivierte Kompetenz */
+        .kompetenz-item.disabled {
+            color: var(--disabled-color);
+            background-color: #f1f1f1;
+        }
+        
+        /* Beschreibungstext Container */
+        .description-box {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            background-color: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            width: 250px;
+            max-width: 300px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            pointer-events: none;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1100px) {
+            .clusters-row {
+                justify-content: center;
+            }
+            
+            .cluster {
+                width: calc(50% - 20px);
+                min-width: 250px;
+                max-width: 400px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .clusters-row {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cluster {
+                width: 100%;
+                max-width: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Link zur Indexseite oben links -->
+    <a href="../" class="root-node" style="position: fixed; top: 20px; left: 20px; z-index: 999; margin: 0; text-decoration: none; font-size: 1.1rem; padding: 10px 20px;">Alle Berufsprofile</a>
+    
+    <div class="container">
+        <h1>Skilltree Frontend Developer</h1>
+        
+        <div class="skilltree">
+            <div class="root-node">Kompetenzen</div>
+            
+            <div class="clusters-row">
+                <!-- Cluster 1: Fachkompetenz -->
+                <div class="cluster">
+                    <div class="cluster-header">Fachliche Fähigkeiten</div>
+                    <div class="kompetenzen-list">
+                        <div class="kompetenz-item" data-description="Fähigkeit, kreative Lösungen auszuarbeiten, um neue Konzepte, Ideen, Produkte oder Dienstleistungen anzubieten; denkt offen, um technologische Fortschritte für Bedürfnisse in Wirtschaft und Gesellschaft zu adressieren.">
+                            Innovationsfähigkeit
+                        </div>
+                        <div class="kompetenz-item" data-description="Fähigkeit, sorgfältig und präzise zu arbeiten, Details zu beachten und Fehler zu vermeiden; umfasst die Bereitschaft, gründlich zu sein, Genauigkeit anzustreben und eine hohe Qualität in der Arbeit zu gewährleisten.">
+                            Aufmerksamkeit für Details
+                        </div>
+                        <div class="kompetenz-item" data-description="Fähigkeit, komplexe Informationen, Situationen oder Aufgaben zu verstehen, zu strukturieren und zu bewältigen; umfasst die Fähigkeit, komplexe Probleme zu analysieren, Lösungen zu finden und Zusammenhänge zu erkennen.">
+                            Umgang mit Komplexität
+                        </div>
+                        <div class="kompetenz-item" data-description="Fähigkeit, Methoden, Verfahren und Prozesse in einem bestimmten Fachgebiet anzuwenden; umfasst die tiefe Kenntnis und das Verständnis von spezifischen theoretischen und praktischen Themen oder Fachgebieten.">
+                            Fachexpertise
+                        </div>
+                        <div class="kompetenz-item" data-description="Fähigkeit, originelle Ideen, Konzepte oder Lösungen zu entwickeln; umfasst die Fähigkeit, neue Verbindungen herzustellen, unkonventionelle Ansätze zu verfolgen und Innovationen zu fördern.">
+                            Kreativität
+                        </div>
+                        <div class="kompetenz-item" data-description="Fähigkeit, in verschiedenen Situationen positive und bereichernde Erfahrungen zu schaffen oder zu ermöglichen; beinhaltet die Fähigkeit, kreative Ideen umzusetzen, um eine besondere Atmosphäre, Kundeninteraktion oder Mitarbeitererfahrung zu schaffen.">
+                            Erlebnisorientiertes Handeln
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cluster 2: Digitale Fähigkeiten -->
+                <div class="cluster">
+                    <div class="cluster-header">Digitale Fähigkeiten</div>
+                    <div class="kompetenzen-list">
+                        <div class="kompetenz-item" data-description="Fähigkeit, digitale Medien zu nutzen, produktiv gestaltend zu entwickeln, für das eigene Leben einzusetzen und refektorisch, kritisch und analytisch die Wirkungsweise in Bezug auf einzelne Personen und die Gesellschaft als Ganzes zu verstehen, sowie die Kenntnis über die Potenziale und Grenzen digitaler Medien und ihrer Wirkungsweisen.">
+                            Digitalkompetenz
+                        </div>
+                        <div class="kompetenz-item" data-description="Fähigkeit, Prinzipien der Mensch-Maschine-Interaktion anzuwenden, um digitale Produkte und Services zu erstellen, die intuitiv, einfach, sicher und effizient zu bedienen sind; versteht die Bedürfnisse bzw. Ziele von Nutzenden und wendet Wissen an, um Funktionen für digitale Produkte zu schaffen, die eine gute Benutzbarkeit sicherstellen.">
+                            Benutzererfahrung, User Experience
+                        </div>
+                        <div class="kompetenz-item" data-description="Fähigkeit, Informationssicherheitsstrategien zu implementieren; beobachtet und geht gegen Eindringen, Betrug und Sicherheitsverletzungen oder -lücken vor; stellt sicher, dass Sicherheitsrisiken bezüglich Unternehmensdaten und -informationen analysiert und gesteuert werden. Überprüft Vorfälle im Bereich Informationssicherheit und gibt Empfehlungen zur kontinuierlichen Sicherheitssteigerung.">
+                            ITK Sicherheitsmanagement
+                        </div>
+                        <div class="kompetenz-item" data-description="Fähigkeit, systematische Prüfverfahren für IT-Systeme oder Nutzeranforderungen von Kunden zu implementieren und diese durchzuführen, damit Entwurfsspezifikationen eingehalten werden; stellt sicher, dass neue oder überarbeitete Komponenten bzw., Systeme den Erwartungen entsprechend funktionieren; sichert die Erfüllung interner, externer, nationaler und internationaler Standards einschließlich Gesundheits- und Sicherheitsbestimmungen für Nutzbarkeit, Leistung, Zuverlässigkeit oder Kompatibilität; fertigt Dokumente und Berichte an, um Einhaltung der Anforderungen zu belegen.">
+                            Testing
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cluster 3: Persönliche Kompetenzen -->
+                <div class="cluster">
+                    <div class="cluster-header">Persönliche Kompetenzen</div>
+                    <div class="kompetenzen-list">
+                        <div class="kompetenz-item" data-description="Fähigkeit, neben sprachlichen Kenntnissen auch Diskurs-, Dialog- und strategische Kommunikationsfähigkeit zu besitzen, um in unterschiedlichen Kontexten und Situationen angemessen, erfolgreich und kommunikativ handlungsfähig zu sein.">
+                            Kommunikationskompetenz
+                        </div>
+                        <div class="kompetenz-item" data-description="Fähigkeit, bereit zu sein, mit anderen in Kommunikation zu treten; bei dieser Fähigkeit geht es nicht nur darum, seinem Gegenüber die richtige Botschaft zu vermitteln und eine klare Formulierung zu finden, sondern auch zuzuhören und auf Gesagtes zu reagieren.">
+                            Kommunikationsfähigkeit
+                        </div>
+                        <div class="kompetenz-item" data-description="Fähigkeit, effektiv in einem Team zu arbeiten, sich mit anderen zu koordinieren, zu kommunizieren und gemeinsame Ziele zu erreichen; beinhaltet die Bereitschaft, Verantwortung zu teilen, andere zu unterstützen und konstruktiv zur Teamdynamik beizutragen.">
+                            Teamfähigkeit
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cluster 4: Persönliche Eigenschaften -->
+                <div class="cluster">
+                    <div class="cluster-header">Persönliche Eigenschaften</div>
+                    <div class="kompetenzen-list">
+                        <div class="kompetenz-item" data-description="Fähigkeit, bereit zum Lernen zu sein, insbesondere bei dem selbstgesteuerten Lernenprozess; die Fähigkeit erstreckt sich auch auf metakognitive Fähigkeiten.">
+                            Lernkompetenz
+                        </div>
+                        <div class="kompetenz-item" data-description="Fähigkeit, Verpflichtungen, Versprechen und Vereinbarungen einzuhalten; umfasst die Bereitschaft, Verantwortung zu übernehmen, pünktlich zu sein und anderen vertrauenswürdig gegenüberzutreten.">
+                            Zuverlässig
+                        </div>
+                        <div class="kompetenz-item" data-description="Fähigkeit, flexibel und anpassungsfähig gegenüber neuen Ideen, Methoden oder Situationen zu sein; beinhaltet die Bereitschaft, sich neuen Gegebenheiten anzupassen, sich weiterzuentwickeln und neue Möglichkeiten zu erkennen.">
+                            Offenheit für Veränderungen
+                        </div>
+                        <div class="kompetenz-item" data-description="Fähigkeit, unter Druck, in stressigen Situationen oder bei hoher Arbeitsbelastung ruhig, effektiv und leistungsfähig zu bleiben; beinhaltet die Fähigkeit, Stress zu bewältigen, sich anzupassen und in schwierigen Situationen konzentriert zu bleiben.">
+                            Belastbarkeit
+                        </div>
+                        <div class="kompetenz-item" data-description="Fähigkeit, Wissen und Fähigkeiten kontinuierlich zu erweitern, sich weiterzuentwickeln und neue Erfahrungen zu machen; umfasst die Fähigkeit, neugierig zu bleiben, offen für Veränderungen zu sein und die eigene persönliche und berufliche Entwicklung voranzutreiben.">
+                            Lebenslanges Lernen
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Beschreibungs-Box (wird dynamisch positioniert) -->
+    <div id="description-box" class="description-box"></div>
+    
+    <!-- Info-Leiste -->
+    <div style="position: fixed; bottom: 10px; left: 10px; background-color: rgba(0,0,0,0.7); color: white; padding: 5px 10px; border-radius: 5px; font-size: 12px; z-index: 999;">
+        Hover über eine Kompetenz zeigt deren Beschreibung
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Beschreibungs-Box-Element
+            const descriptionBox = document.getElementById('description-box');
+            
+            // Event-Listener für alle Kompetenz-Items
+            const kompetenzItems = document.querySelectorAll('.kompetenz-item:not(.disabled)');
+            
+            kompetenzItems.forEach(item => {
+                // Maus-Enter-Event (Beschreibung anzeigen)
+                item.addEventListener('mouseenter', function(e) {
+                    const description = this.getAttribute('data-description');
+                    if (description) {
+                        // Beschreibungstext setzen
+                        descriptionBox.textContent = description;
+                        
+                        // Element-Position und Größe ermitteln
+                        const rect = this.getBoundingClientRect();
+                        
+                        // Viewport-Abmessungen
+                        const viewportWidth = window.innerWidth;
+                        const viewportHeight = window.innerHeight;
+                        
+                        // Beschreibungsbox anzeigen (für Größenberechnung)
+                        descriptionBox.style.display = 'block';
+                        
+                        // Größe der Beschreibungsbox ermitteln
+                        const boxWidth = descriptionBox.offsetWidth;
+                        const boxHeight = descriptionBox.offsetHeight;
+                        
+                        // Verfügbaren Platz in allen Richtungen berechnen
+                        const spaceRight = viewportWidth - rect.right - 15;
+                        const spaceLeft = rect.left - 15;
+                        const spaceBelow = viewportHeight - rect.bottom - 15;
+                        const spaceAbove = rect.top - 15;
+                        
+                        // Positionierung basierend auf verfügbarem Platz
+                        // Standardmäßig: Beschreibung rechts vom Element
+                        descriptionBox.style.left = 'auto';
+                        descriptionBox.style.right = 'auto';
+                        descriptionBox.style.top = 'auto';
+                        descriptionBox.style.bottom = 'auto';
+                        
+                        // Horizontale Positionierung - auf der Seite mit mehr Platz
+                        if (spaceRight >= boxWidth || spaceRight > spaceLeft) {
+                            // Rechts vom Element
+                            descriptionBox.style.left = rect.right + 15 + 'px';
+                            
+                            // Anpassung wenn nötig
+                            if (rect.right + 15 + boxWidth > viewportWidth) {
+                                descriptionBox.style.left = viewportWidth - boxWidth - 5 + 'px';
+                            }
+                        } else {
+                            // Links vom Element
+                            descriptionBox.style.left = 'auto';
+                            descriptionBox.style.right = viewportWidth - rect.left + 15 + 'px';
+                            
+                            // Anpassung wenn nötig
+                            if (rect.left - 15 - boxWidth < 0) {
+                                descriptionBox.style.right = 'auto';
+                                descriptionBox.style.left = 5 + 'px';
+                            }
+                        }
+                        
+                        // Vertikale Positionierung
+                        if (rect.top + boxHeight > viewportHeight) {
+                            // Wenn die Box unten rausragt, oben ausrichten
+                            descriptionBox.style.top = Math.max(5, viewportHeight - boxHeight - 5) + 'px';
+                        } else {
+                            // Normalerweise auf gleicher Höhe wie Element
+                            descriptionBox.style.top = rect.top + 'px';
+                        }
+                    }
+                });
+                
+                // Maus-Leave-Event (Beschreibung verstecken)
+                item.addEventListener('mouseleave', function() {
+                    descriptionBox.style.display = 'none';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
